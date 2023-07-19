@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    "corsheaders",
-    'categorymanager',
+    'django_filters',   # filters
+    'drf_yasg',         # for swagger
+    'rest_framework',   # For rest
+    "corsheaders",      # for headers
+    'categorymanager',  # catergorymanager api
+    'usermanager',      # user manager API
+    'productmanager',
 ]
 
 MIDDLEWARE = [
@@ -102,10 +106,20 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        
+    ),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
+
+
+
+AUTH_USER_MODEL = 'usermanager.User' # for user authentication
+
 
 LANGUAGE_CODE = 'en-us'
 
