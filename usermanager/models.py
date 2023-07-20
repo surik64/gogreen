@@ -34,15 +34,14 @@ class User(auth_models.AbstractBaseUser, models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField(max_length=200,unique=True)
     phone = models.CharField(max_length=15)
-    dob = models.CharField(max_length=20)
-
+    dob = models.CharField(max_length=20, null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='profile', default='', null=True, blank=True)
     # Mondatory things 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser= models.BooleanField(default=True)
-
-
     is_admin = models.BooleanField(default=False)
+    is_user = models.BooleanField(default=False)
 
 
     USERNAME_FIELD = 'email'

@@ -15,19 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from categorymanager.views import CategoryViewSet, SubCategoryViewSet
-from productmanager.views import ProductViewSet
+
 from rest_framework.routers import DefaultRouter
 from django.conf import settings            # For image configuarations
 from django.conf.urls.static import static  #for image configurations
-router = DefaultRouter()
-router.register(r'category', CategoryViewSet)
-router.register(r'subcategory', SubCategoryViewSet)
-router.register(r'products', ProductViewSet)
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from usermanager.views import SigninView
 from drf_yasg import openapi
+
+from categorymanager.views import CategoryViewSet, SubCategoryViewSet
+from productmanager.views import ProductViewSet
+from ordermanager.views import OrderViewSet, CartViewSet,WishlsitViewSet
+router = DefaultRouter()
+
+
+
+
+
+router.register(r'category', CategoryViewSet)
+router.register(r'subcategory', SubCategoryViewSet)
+router.register(r'products', ProductViewSet)
+router.register(r'orders', OrderViewSet)
+router.register(r'cart', CartViewSet)
+router.register(r'wishlist', WishlsitViewSet)
 
 schema_view = get_schema_view(
    openapi.Info(
