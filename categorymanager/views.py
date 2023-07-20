@@ -13,7 +13,7 @@ class SubCatSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubCategoryModel
         fields = '__all__'
-        depth = 1
+        # depth = 1
 
 class CategoryViewSet(viewsets.ModelViewSet):
     filterset_class =  CategoryFilter

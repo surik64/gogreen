@@ -3,8 +3,6 @@ from django.contrib.auth import models as auth_models
 # Create your models here.
 
 
-
-
 # AbstractBaseUser
 # BaseUserManager
 
@@ -14,7 +12,7 @@ class UserManager(auth_models.BaseUserManager):
         "Creates and saves a new user"
 
         if not email:
-            raise ValueError(_('Users must have an email address'))
+            raise ValueError(('Users must have an email address'))
 
         user = self.model(email=self.normalize_email(email), **extra_fields)
         if password:
@@ -31,9 +29,6 @@ class UserManager(auth_models.BaseUserManager):
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
-
-
-
 
 class User(auth_models.AbstractBaseUser, models.Model):
     name = models.CharField(max_length=200)
@@ -54,11 +49,6 @@ class User(auth_models.AbstractBaseUser, models.Model):
 
 
     objects = UserManager()
-
-
-
-
-
         
     def has_perm(self, perm, obj=None):
         return self.is_admin

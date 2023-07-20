@@ -37,17 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_filters',   # filters
-    'drf_yasg',         # for swagger
-    'rest_framework',   # For rest
-    "corsheaders",      # for headers
-    'categorymanager',  # catergorymanager api
-    'usermanager',      # user manager API
-    'productmanager',
+    'django_filters',   ## filters
+    'drf_yasg',         ## for swagger
+    'rest_framework',   ## For rest
+    "corsheaders",      ## for headers
+    'categorymanager',  ## catergorymanager api
+    'usermanager',      ## user manager API
+    'productmanager',   ## Product manager API
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",  ##corsheaders
     "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -106,19 +106,24 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+##Rest Framework configuarations
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
         
     ),
-}
+}    ##end
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 
 
-AUTH_USER_MODEL = 'usermanager.User' # for user authentication
+AUTH_USER_MODEL = 'usermanager.User' ## for user model authentication  ##end
 
 
 LANGUAGE_CODE = 'en-us'
@@ -135,7 +140,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'              ##For image configuarations
+MEDIA_DIR = BASE_DIR / 'media'       ##media folder created in aplication folder
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'                ##end
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

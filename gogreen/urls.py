@@ -18,12 +18,15 @@ from django.urls import path, include
 from categorymanager.views import CategoryViewSet, SubCategoryViewSet
 from productmanager.views import ProductViewSet
 from rest_framework.routers import DefaultRouter
+from django.conf import settings            # For image configuarations
+from django.conf.urls.static import static  #for image configurations
 router = DefaultRouter()
 router.register(r'category', CategoryViewSet)
 router.register(r'subcategory', SubCategoryViewSet)
 router.register(r'products', ProductViewSet)
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
+from usermanager.views import SigninView
 from drf_yasg import openapi
 
 schema_view = get_schema_view(
@@ -44,7 +47,9 @@ urlpatterns = [
    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
     #path('category', CategoryViewSet)
+    path('signin/',SigninView.as_view()  , name='signin'),
+    
     path('', include(router.urls))
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #from + line of ocde is url root setting
  

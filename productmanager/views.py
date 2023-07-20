@@ -13,5 +13,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = ProductModel.objects.all()
-    serializer_class = ProductSerializer
-    parser_classes = (FormParser,)
+    serializer_class = ProductSerializer           #MultiPartParser is used for videos,images for posting.
+    parser_classes = (FormParser,MultiPartParser)  #FormParser is used for images format while posting images
+    
