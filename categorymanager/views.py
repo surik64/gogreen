@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets, serializers
 from .models import CategoryModel,SubCategoryModel
 from  .filters import CategoryFilter
+from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 
 # Create your views here.
 class CatSerializer(serializers.ModelSerializer):
@@ -25,5 +26,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class SubCategoryViewSet(viewsets.ModelViewSet):
     queryset = SubCategoryModel.objects.all()
     serializer_class = SubCatSerializer
+    parser_classes = ( MultiPartParser, FormParser)
+
     
     
